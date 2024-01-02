@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post('/send-email', (req, res) => {
-  const { name, email, message } = req.body;
+  const {email, message } = req.body;
 
   // Set up nodemailer transporter
   const transporter = nodemailer.createTransport({
@@ -25,7 +25,7 @@ app.post('/send-email', (req, res) => {
     from: {email},
     to: 'pixwingai@gmail.com',
     subject: 'New Form Submission',
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    text: `Email: ${email}\nMessage: ${message}`,
   };
 
   // Send email
@@ -35,7 +35,7 @@ app.post('/send-email', (req, res) => {
     }
 
     // Send a thank-you response to the user
-    res.status(200).send(`Thank you for visiting our website, ${name}! Your message has been received.`);
+    res.status(200).send(`Thank you for visiting our website! Your message has been received.`);
   });
 });
 
